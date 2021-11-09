@@ -1,8 +1,10 @@
 #include<iostream>
+#include<vector>
+#include<string.h>
 
 using namespace std;
 
-string input;
+char input[50];
 
 struct Student {
   char firstName[10];
@@ -30,6 +32,21 @@ struct Student getStudent() {
 }
 
 int main() {
+  /*
+// Create a vector containing integers
+    std::vector<int> v = { 7, 5, 16, 8 };
+ 
+    // Add two more integers to vector
+    v.push_back(25);
+    v.push_back(13);
+ 
+    // Print out the vector
+    std::cout << "v = { ";
+    for (int n : v) {
+        std::cout << n << ", ";
+    }
+    std::cout << "}; \n";
+   */
   while (true) {
       //initialize empty student vector
       //print possible cmds
@@ -37,21 +54,21 @@ int main() {
 	   << endl << "PRINT: Prints all current entries in the student list"
 	   << endl << "DELETE: Deletes speciied student from the list"
 	   << endl << "QUIT: Exits the program" << endl;
-      cin >> input;
+      cin.getline(input, 50, '\n');
       //if ADD, add new student
-      if (input == "ADD" || input == "add") {
+      if (strcmp(input,"ADD") == 0 || strcmp(input,"add") == 0) {
 	cout << "ADD" << endl;
       }
       //if PRINT, print all currently stored students
-      else if (input == "PRINT" || input == "print") {
+      else if (strcmp(input,"PRINT") == 0 || strcmp(input,"print") == 0) {
 	cout << "PRINT" << endl;
       }
       //if DELETE, delete student from list
-      else if (input == "DELETE" || input == "delete") {
+      else if (strcmp(input,"DELETE") == 0 || strcmp(input,"delete") == 0) {
 	cout << "DELETE" << endl;
       }
       //if QUIT, exit program
-      else if (input == "QUIT" || input == "quit") {
+      else if (strcmp(input,"QUIT") == 0 || strcmp(input,"quit") == 0) {
 	cout << "QUIT" << endl;
 	break;
       }
