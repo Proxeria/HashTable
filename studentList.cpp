@@ -53,17 +53,24 @@ int main() {
       //if PRINT, print all currently stored students
       else if (strcmp(input,"PRINT") == 0 || strcmp(input,"print") == 0) {
 	for (Student  thisStudent: students) {
-	  std::cout << thisStudent.firstName << " " << thisStudent.lastName << ", " << thisStudent.id << ", " << thisStudent.gpa << endl;
+	  std::cout << thisStudent.firstName << " " << thisStudent.lastName << ", " << thisStudent.id << ", " << ("%.2f", thisStudent.gpa) << endl;
 	}
-	cout << "PRINT" << endl;
       }
       //if DELETE, delete student from list
       else if (strcmp(input,"DELETE") == 0 || strcmp(input,"delete") == 0) {
-	cout << "DELETE" << endl;
+	int delId;
+	cout << "Enter the id of the student you would like to remove from the list: " << endl;
+	cin.getline(input, 50, '\n');
+	delId = atoi (input);
+	vector<Student>::iterator it;
+	for (it = students.begin(); it != students.end(); it++) {
+	  if (delId == it->id) {
+	    students.erase(it);
+	  }
+	}
       }
       //if QUIT, exit program
       else if (strcmp(input,"QUIT") == 0 || strcmp(input,"quit") == 0) {
-	cout << "QUIT" << endl;
 	break;
       }
       //else, cmd not recognized
@@ -72,9 +79,6 @@ int main() {
 	cout << "Command not recognized" << endl;
       }
     }
-
-
-
   return 0;
 }
 //this thing
