@@ -4,7 +4,6 @@
 
 using namespace std;
 
-char input[50];
 
 struct Student {
   char firstName[10];
@@ -16,37 +15,28 @@ struct Student {
 
 
 struct Student getStudent() {
+  char input[50];
   Student newStudent;
+  //change to cstring stuff
   cout << "Student's first name: ";
-  cin >> newStudent.firstName;
+  cin.getline(newStudent.firstName, sizeof(newStudent.firstName), '\n');
   cout << "Student's last name: ";
-  cin >> newStudent.lastName;
+  cin.getline(newStudent.lastName, sizeof(newStudent.lastName), '\n');
   cout << "Student's ID#: ";
-  cin >> newStudent.id;
+  cin.getline(input, 50, '\n');
+  newStudent.id = atoi (input);
   cout << "Student's GPA: ";
-  cin >> newStudent.gpa;
-  cout << newStudent.firstName << " " << newStudent.lastName << " ID:"
-       << newStudent.id << " GPA:" << newStudent.gpa << endl;
-
-    return newStudent;
+  cin.getline(input, 50, '\n');
+  newStudent.gpa = atof (input);
+  
+  return newStudent;
 }
 
 int main() {
-  /*
-// Create a vector containing integers
-    std::vector<int> v = { 7, 5, 16, 8 };
- 
-    // Add two more integers to vector
-    v.push_back(25);
-    v.push_back(13);
- 
-    // Print out the vector
-    std::cout << "v = { ";
-    for (int n : v) {
-        std::cout << n << ", ";
-    }
-    std::cout << "}; \n";
-   */
+  char input[50];
+  
+  std::vector<Student> students; //vector of Student named students
+           
   while (true) {
       //initialize empty student vector
       //print possible cmds
@@ -57,10 +47,14 @@ int main() {
       cin.getline(input, 50, '\n');
       //if ADD, add new student
       if (strcmp(input,"ADD") == 0 || strcmp(input,"add") == 0) {
-	cout << "ADD" << endl;
+	students.push_back(getStudent());
+	cout << "Student added! " << endl;
       }
       //if PRINT, print all currently stored students
       else if (strcmp(input,"PRINT") == 0 || strcmp(input,"print") == 0) {
+	for (Student  thisStudent: students) {
+	  std::cout << thisStudent.firstName << " " << thisStudent.lastName << ", " << thisStudent.id << ", " << thisStudent.gpa << endl;
+	}
 	cout << "PRINT" << endl;
       }
       //if DELETE, delete student from list
@@ -73,7 +67,8 @@ int main() {
 	break;
       }
       //else, cmd not recognized
-      else {
+      else if (strcmp(input,"QUIT") != 0 && strcmp(input,"quit") != 0 && strcmp(input,"DELETE") != 0 && strcmp(input,"delete") != 0 &&
+	       strcmp(input,"PRINT") != 0 && strcmp(input,"print") != 0 && strcmp(input,"ADD") != 0 && strcmp(input,"add") != 0) {
 	cout << "Command not recognized" << endl;
       }
     }
