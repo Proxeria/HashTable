@@ -18,7 +18,10 @@ class Table{
   void rmStudent(int studentID);
   void printTable();
  private:
+  Node* buckets;
   int numBuckets;
+  int hash(int studentID);
+  void addToBucket(Node** head, Node* previous, Node* current, Student* student);
 };
 
 #endif

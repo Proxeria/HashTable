@@ -1,6 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include "node.h"
+#include "table.h"
 
 using namespace std;
 
@@ -28,7 +29,7 @@ public:
         return (x % BUCKET);
     }
  
-    void displayHash();
+    
 };
  
 Hash::Hash(int b)
@@ -61,16 +62,6 @@ void Hash::deleteItem(int key)
     table[index].erase(i);
 }
  
-// function to display hash table
-void Hash::displayHash() {
-  for (int i = 0; i < BUCKET; i++) {
-  cout << i;
-    for (auto x : table[i])
-    cout << " --> " << x;
-    cout << endl;
-  }
-}
- 
 // Driver program
 int main()
 {
@@ -87,9 +78,6 @@ int main()
   // delete 12 from hash table
   h.deleteItem(12);
  
-  // display the Hash table
-  h.displayHash();
- 
   return 0;
 }
  */
@@ -97,17 +85,16 @@ int main()
 //students have only ids at the moment
 //students are under node, no user interaction yet
 
-void add(Node*, Node*, Student* student);
-void print(Node* next);
+//void print(Node* next);
 Student* getStudent();
-float average(Node* next);
-void deleteNode(Node*, Node*, int);
+//void deleteNode(Node*, Node*, int);
 
-Node* head = NULL;
+
 
 int main() {
   
   char input[50];
+  Table studentTable(100);
   while (true) {
     
     cout << "COMMANDS: "<< endl << "ADD: Create a new entry to the student list"
@@ -118,12 +105,12 @@ int main() {
     cin.getline(input, 50, '\n');
     //if ADD, add new student
     if (strcmp(input,"ADD") == 0 || strcmp(input,"add") == 0) {
-      add(NULL, head, getStudent());
+      studentTable.add(getStudent());
       cout << "Student added! " << endl;
     }
     //if PRINT, print all currently stored students
     else if (strcmp(input,"PRINT") == 0 || strcmp(input,"print") == 0) {
-      print(head);
+      studentTable.print();
     }
     //if DELETE, delete student from list
     else if (strcmp(input,"DELETE") == 0 || strcmp(input,"delete") == 0) {
@@ -131,12 +118,9 @@ int main() {
       cout << "Enter the id of the student you would like to remove from the list: " << endl;
       cin.getline(input, 50, '\n');
       delId = atoi (input);
-      deleteNode(NULL, head, delId);
+      studentTable.rmStudent(delId);
     }
-    else if (strcmp(input,"AVERAGE") == 0 || strcmp(input,"average") == 0) {
-      cout << std::fixed;
-      cout << std::setprecision(2) << average(head) << endl;
-    }
+    
     //if QUIT, exit program
     else if (strcmp(input,"QUIT") == 0 || strcmp(input,"quit") == 0) {
       break;
@@ -150,37 +134,7 @@ int main() {
     }
   }
 }
-
-
-
-void add(Node* previous, Node* current, Student* student) {
-  Node* newNode = NULL;
-  if (current == NULL) {
-    newNode = new Node(student);
-    if (previous != NULL) {
-      previous->setNext(newNode);
-    }
-    else {
-      head = newNode;
-    }
-  }
-  else {
-    if (current != NULL && student->getStudentID() > current->getStudent()->getStudentID()) {
-      add(current, current->getNext(), student);
-      return;
-    }
-    newNode = new Node(student);
-    if (previous == NULL) {
-      head = newNode;
-    }
-    else {
-      previous->setNext(newNode);
-    }
-    
-    newNode->setNext(current);
-  }
-}
-
+/*
 void print(Node* next) {
   if (next != NULL) {
     cout << next->getStudent()->getFirstname() << " ";
@@ -195,6 +149,7 @@ void print(Node* next) {
     cout << endl;
   }
 }
+*/
 
 Student* getStudent() {
   char input[50];
@@ -216,7 +171,7 @@ Student* getStudent() {
 
   return new Student(firstname, lastname, studentid, studentgpa);
 }
-
+/*
 void deleteNode(Node* previous, Node* next, int studentID) {
   if (next == NULL) {
     return;
@@ -237,15 +192,9 @@ void deleteNode(Node* previous, Node* next, int studentID) {
     }
   }
 }
+*/
 
-float sum(Node* next) {
-  if (next != NULL) {
-    return next->getStudent()->getGPA() + sum(next->getNext()); 
-  }
-  else {
-    return 0;
-  }
-}
+
 int count(Node* next) {
   if (next != NULL) {
     return 1 + count(next->getNext()); 
@@ -255,11 +204,4 @@ int count(Node* next) {
   }
 }
 
-float average(Node* next) {
-  if (next != NULL) {
-    return sum(next) / count(next);
-  }
-  else {
-    return 0;
-  }
-}
+
