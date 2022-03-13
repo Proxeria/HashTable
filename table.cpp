@@ -10,7 +10,7 @@ Table::Table(int numBuckets){//constructor class
 }
 
 Table::~Table(){//destructor
-  cout << "deletes something" << endl;
+  cout << "works once" << endl;
   //itterate over buckets in table, for each bucket delete each list inside it and each student object
   for (int i = 0; i < numBuckets; i++) {
     //delete student from each item in this bucket list
@@ -18,6 +18,7 @@ Table::~Table(){//destructor
       delete *it;
     }
   }
+  cout << "works twice" << endl;
 }
 
 void Table::printTable(){
@@ -45,7 +46,16 @@ void Table::add(Student* student){
 
 void Table::rmStudent(int studentID){
   cout << "removes a student" << endl;
-
+  int bucketID = hash(studentID);
+  for (auto it = buckets[bucketID].begin(); it != buckets[bucketID].end(); it++) {
+    if ((*it)->getStudentID() == studentID) {
+      cout << "found student" << endl;
+      delete *it;
+      buckets[bucketID].erase(it++);
+      cout << "deleted" << endl;
+    }
+  }
+  cout << "deleteded" << endl;
 }
 
 int Table::hash(int studentID){
