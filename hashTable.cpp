@@ -1,95 +1,10 @@
 #include <iostream>
 #include <iomanip>
-#include "node.h"
 #include "table.h"
 
 using namespace std;
 
-/*
-#include<bits/stdc++.h>
-using namespace std;
- 
-class Hash
-{
-    int BUCKET;    // No. of buckets
- 
-    // Pointer to an array containing buckets
-    list<int> *table;
-public:
-    Hash(int V);  // Constructor
- 
-    // inserts a key into hash table
-    void insertItem(int x);
- 
-    // deletes a key from hash table
-    void deleteItem(int key);
- 
-    // hash function to map values to key
-    int hashFunction(int x) {
-        return (x % BUCKET);
-    }
- 
-    
-};
- 
-Hash::Hash(int b)
-{
-    this->BUCKET = b;
-    table = new list<int>[BUCKET];
-}
- 
-void Hash::insertItem(int key)
-{
-    int index = hashFunction(key);
-    table[index].push_back(key);
-}
- 
-void Hash::deleteItem(int key)
-{
-  // get the hash index of key
-  int index = hashFunction(key);
- 
-  // find the key in (index)th list
-  list <int> :: iterator i;
-  for (i = table[index].begin();
-           i != table[index].end(); i++) {
-    if (*i == key)
-      break;
-  }
- 
-  // if key is found in hash table, remove it
-  if (i != table[index].end())
-    table[index].erase(i);
-}
- 
-// Driver program
-int main()
-{
-  // array that contains keys to be mapped
-  int a[] = {15, 11, 27, 8, 12};
-  int n = sizeof(a)/sizeof(a[0]);
- 
-  // insert the keys into the hash table
-  Hash h(7);   // 7 is count of buckets in
-               // hash table
-  for (int i = 0; i < n; i++)
-    h.insertItem(a[i]); 
- 
-  // delete 12 from hash table
-  h.deleteItem(12);
- 
-  return 0;
-}
- */
-
-//students have only ids at the moment
-//students are under node, no user interaction yet
-
-//void print(Node* next);
 Student* getStudent();
-//void deleteNode(Node*, Node*, int);
-
-
 
 int main() {
   
@@ -110,7 +25,7 @@ int main() {
     }
     //if PRINT, print all currently stored students
     else if (strcmp(input,"PRINT") == 0 || strcmp(input,"print") == 0) {
-      studentTable.print();
+      studentTable.printTable();
     }
     //if DELETE, delete student from list
     else if (strcmp(input,"DELETE") == 0 || strcmp(input,"delete") == 0) {
@@ -134,22 +49,6 @@ int main() {
     }
   }
 }
-/*
-void print(Node* next) {
-  if (next != NULL) {
-    cout << next->getStudent()->getFirstname() << " ";
-    cout << next->getStudent()->getLastname() << " ";
-    cout << next->getStudent()->getStudentID() << " ";
-    cout << next->getStudent()->getGPA() << " ";
-    cout << endl;
-    print(next->getNext());
-    
-  }
-  else {
-    cout << endl;
-  }
-}
-*/
 
 Student* getStudent() {
   char input[50];
@@ -171,37 +70,9 @@ Student* getStudent() {
 
   return new Student(firstname, lastname, studentid, studentgpa);
 }
-/*
-void deleteNode(Node* previous, Node* next, int studentID) {
-  if (next == NULL) {
-    return;
-  }
-  else {
-    if (studentID != next->getStudent()->getStudentID()) {
-      deleteNode(next, next->getNext(), studentID);
-      return;
-    }
-    else {
-      if (previous == NULL) {
-	head = next->getNext();
-      }
-      else {
-	previous->setNext(next->getNext());
-      }
-      delete next;
-    }
-  }
-}
-*/
 
 
-int count(Node* next) {
-  if (next != NULL) {
-    return 1 + count(next->getNext()); 
-  }
-  else {
-    return 0;
-  }
-}
+
+
 
 

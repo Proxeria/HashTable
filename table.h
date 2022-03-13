@@ -5,8 +5,8 @@
 //all the libararies
 #include <iostream>
 #include <cstring>
+#include <list>
 #include "Student.h"
-#include "node.h"
 
 using namespace std;
 
@@ -18,10 +18,11 @@ class Table{
   void rmStudent(int studentID);
   void printTable();
  private:
-  Node* buckets;
   int numBuckets;
+  std::list<Student*> *buckets;
   int hash(int studentID);
-  void addToBucket(Node** head, Node* previous, Node* current, Student* student);
+  // std::list<Student*> buckets;
+
 };
 
 #endif
