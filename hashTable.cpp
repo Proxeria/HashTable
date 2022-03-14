@@ -61,7 +61,7 @@ int main() {
 	char temp2 = '0' + rand() % 10;
 	//stack overflow char to std::string
 	string tempGPA = string(1, temp1) + "." + string(1, temp2);
-	cout << tempGPA << endl;
+	//cout << tempGPA << endl;
 	float rdmGPA = atof(tempGPA.c_str());
 	cout << "Adding: " << rdmFirst << " " << rdmLast << " " << i + 1 << " " << rdmGPA << endl;
 	studentTable.add(new Student((char*)rdmFirst.c_str(), (char*)rdmLast.c_str(), i + 1, rdmGPA));
