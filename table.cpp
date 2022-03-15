@@ -39,6 +39,23 @@ void Table::printTable(){
 void Table::add(Student* student){
   int bucketID = hash(student->getStudentID());
   buckets[bucketID].push_back(student);
+  if (buckets[bucketID].size() >= 3) {
+    cout << "make big" << endl;
+    int oldNumBuckets = this->numBuckets;
+    std::list<Student*> *oldBuckets = this->buckets;
+    this->numBuckets = this->numBuckets * 2;
+    this->buckets = new std::list<Student*>[this->numBuckets];
+
+    for (int i = 0; i < oldNumBuckets; i++) {
+      for (auto it = oldBuckets[i].begin(); it != oldBuckets[i].end(); it++) {
+	this->add(*it);
+      }
+    }
+    //tried deleting oldBuckets but kept segfaulting and I was never able to find out why
+    // cout << numBuckets << endl;
+    // cout << "bonk" << endl;
+    // cout << "bonked" << endl;
+  }
   //cout << "adds a student" << endl;
 }
 
